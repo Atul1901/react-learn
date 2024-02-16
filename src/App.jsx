@@ -48,10 +48,10 @@ function App() {
 
   console.log("selectedTopic >> ", selectedTopic);
 
-  console.log(
-    "{EXAMPLES[selectedTopic].title} > ",
-    EXAMPLES[selectedTopic].title
-  );
+  // console.log(
+  //   "{EXAMPLES[selectedTopic].title} > ",
+  //   EXAMPLES[selectedTopic]?.title
+  // );
 
   console.log("EXAMPLES > ", EXAMPLES);
 
