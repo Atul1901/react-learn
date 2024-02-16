@@ -1,12 +1,12 @@
-import reactImg from "./assets/components.png";
-import JSXimg from "./assets/jsx-ui.png";
-import PropsImg from "./assets/config.png";
-import StateImg from "./assets/state-mgmt.png";
+// import reactImg from "./assets/components.png";
+// import JSXimg from "./assets/jsx-ui.png";
+// import PropsImg from "./assets/config.png";
+// import StateImg from "./assets/state-mgmt.png";
 import { Header } from "./components/Header.js";
 import { Cards } from "./components/Cards.js";
 import { TabButton } from "./components/TabButton.js";
 import { useState } from "react";
-import { EXAMPLES } from "./components/data.js";
+import { CORE_CONCEPTS, EXAMPLES } from "./components/data.js";
 
 // const reactDescription = ["Fundamental", "crucial", "core"];
 
@@ -44,8 +44,18 @@ function App() {
 
   const handleSelect = (selectedButton) => {
     setSelectedTopic(selectedButton);
-    // console.log(selectedButton);
   };
+
+  console.log("selectedTopic >> ", selectedTopic);
+
+  console.log(
+    "{EXAMPLES[selectedTopic].title} > ",
+    EXAMPLES[selectedTopic].title
+  );
+
+  console.log("EXAMPLES > ", EXAMPLES);
+
+  console.log("EXAMPLES[selectedTopic] > ", EXAMPLES[selectedTopic]);
 
   return (
     <div>
@@ -53,7 +63,7 @@ function App() {
       <main>
         <section id="core-concepts">
           <ul>
-            <Cards
+            {/* <Cards
               title="Components"
               description="The core UI building block"
               img={reactImg}
@@ -72,28 +82,51 @@ function App() {
               title="State"
               description="React-managed data which, when changed, causes the component to re-render & the UI to update."
               img={StateImg}
-            />
+            /> */}
+            {CORE_CONCEPTS.map((CardItem, index) => (
+              <Cards key={index} {...CardItem}></Cards>
+            ))}
+
+            {/* <Cards pro {CORE_CONCEPTS[0]}></Cards> */}
           </ul>
         </section>
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={() => handleSelect("Components")}>
+            <TabButton
+              isSelected={selectedTopic === "components"}
+              onSelect={() => handleSelect("components")}
+            >
               Components
             </TabButton>
-            <TabButton onSelect={() => handleSelect("JSX")}>JSX</TabButton>
-            <TabButton onSelect={() => handleSelect("Props")}>Props</TabButton>
-            <TabButton onSelect={() => handleSelect("State")}>State</TabButton>
+            <TabButton
+              isSelected={selectedTopic === "jsx"}
+              onSelect={() => handleSelect("jsx")}
+            >
+              JSX
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "props"}
+              onSelect={() => handleSelect("props")}
+            >
+              Props
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "state"}
+              onSelect={() => handleSelect("state")}
+            >
+              State
+            </TabButton>
           </menu>
 
           {!selectedTopic ? (
             <p>please select a topic</p>
           ) : (
             <div id="tab-content">
-              <h3>{EXAMPLES[selectedTopic].title}</h3>
-              <p>{EXAMPLES[selectedTopic].description}</p>
+              <h3>{EXAMPLES[selectedTopic]?.title}</h3>
+              <p>{EXAMPLES[selectedTopic]?.description}</p>
               <pre>
-                <code>{EXAMPLES[selectedTopic].code}</code>
+                <code>{EXAMPLES[selectedTopic]?.code}</code>
               </pre>
             </div>
           )}
