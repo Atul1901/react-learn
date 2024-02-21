@@ -50,7 +50,10 @@ export default function LastTry() {
     <div className="stopWatch">
       <h2 className="timer">{showTime}</h2>
       <div className="actions">
-        <button className="start-stop" onClick={handleStartStop}>
+        <button
+          className={!isRunning ? "start-stop start" : "start-stop"}
+          onClick={handleStartStop}
+        >
           {isRunning ? "Stop" : "Start"}
         </button>
         <button onClick={handleReset}>Reset</button>
